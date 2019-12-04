@@ -11,8 +11,8 @@ namespace AOC2019
             Console.WriteLine("Hello World!");
 
             Console.WriteLine("Hello World!");
-            Day2.Part1();
-            Day2.Part2();
+            Day3.Part1();
+            //Day3.Part2();
             Console.ReadLine();
         }
     }
