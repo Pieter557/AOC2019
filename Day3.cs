@@ -20,8 +20,13 @@ namespace AOC2019
             var wire2 = ParseWire(secondWireMoves);
 
             var intersects = wire1.Intersect(wire2).Where(p => p.X != 0 && p.Y != 0);
-            var closest = intersects.OrderBy(p => Math.Abs(p.X) + Math.Abs(p.Y));
+            var closest = intersects.OrderBy(p => Math.Abs(p.X + 0) + Math.Abs(p.Y) + 0);
             Console.WriteLine(Math.Abs(closest.First().X) + Math.Abs(closest.First().Y));
+
+            var firstIntersection = intersects.First();
+            var stepsWire1 = wire1.IndexOf(firstIntersection);
+            var stepsWire2 = wire2.IndexOf(firstIntersection);
+            Console.WriteLine(stepsWire1 + stepsWire2);
         }
 
         private static List<Point> ParseWire(string Moves)
@@ -35,31 +40,35 @@ namespace AOC2019
                 var distance = Convert.ToInt32(direction.Substring(1));
                 char dir = direction[0];
 
-                var newPoint = new Point(lastPoint.X, lastPoint.Y);
-
-                int xOffset = 0;
-                int yOffset = 0;
 
                 switch (dir)
                 {
                     case 'U':
-                        xOffset = -1;
+                        for (int i = 1; i <= distance; i++)
+                        {
+                            newWire.Add(new Point(lastPoint.X, lastPoint.Y + i));
+                        }
                         break;
                     case 'D':
-                        xOffset = 1;
+                        for (int i = 1; i <= distance; i++)
+                        {
+                            newWire.Add(new Point(lastPoint.X, lastPoint.Y - i));
+                        }
                         break;
                     case 'R':
-                        yOffset = 1;
+                        for (int i = 1; i <= distance; i++)
+                        {
+                            newWire.Add(new Point(lastPoint.X + i, lastPoint.Y));
+                        }
                         break;
                     case 'L':
-                        yOffset = -1;
+                        for (int i = 1; i <= distance; i++)
+                        {
+                            newWire.Add(new Point(lastPoint.X - i, lastPoint.Y));
+                        }
                         break;
                 }
-                for (int i = 0; i < distance; i++)
-                {
-                    lastPoint = new Point(lastPoint.X + xOffset, lastPoint.Y + yOffset);
-                    newWire.Add(lastPoint);
-                }
+
             }
 
             return newWire;
