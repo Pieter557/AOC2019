@@ -10,8 +10,8 @@ namespace AOC2019
         {
 
 
-            Day5.Part1();
-            Day5.Part2();
+            Day8.Part1();
+            Day8.Part2();
             Console.ReadLine();
 
         }
